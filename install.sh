@@ -17,7 +17,7 @@ BOLD='\033[1m'
 RESET='\033[0m'
 
 REPO_URL="https://github.com/dijkstra402/emoera-code-cli.git"
-NPM_PACKAGE="@eera/yuncode-cli"
+NPM_PACKAGE="emoera-code-cli"
 MIN_NODE_VERSION=18
 INSTALL_DIR="$HOME/.yuncode/cli"
 

@@ -7,7 +7,7 @@
 $ErrorActionPreference = "Stop"
 
 # ── 配置 ──────────────────────────────────────────────────
-$NpmPackage   = "@eera/yuncode-cli"
+$NpmPackage   = "emoera-code-cli"
 $RepoUrl      = "https://github.com/dijkstra402/emoera-code-cli.git"
 $MinNodeMajor = 18
 $InstallDir   = "$env:USERPROFILE\.yuncode\cli"

@@ -51,7 +51,7 @@ irm https://code.emoera.cn/install.ps1 | iex
 ### npm 安装
 
 ```bash
-npm install -g @eera/yuncode-cli
+npm install -g emoera-code-cli
 ```
 
 ### 从源码安装

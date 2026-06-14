@@ -1,5 +1,5 @@
 {
-  "name": "@eera/yuncode-cli",
+  "name": "emoera-code-cli",
   "version": "1.0.0",
   "description": "E时代云剪切板命令行工具 — 在终端中快速存取云剪切板内容",
   "author": "E时代 <dev@emoera.cn>",
