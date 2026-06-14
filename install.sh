@@ -190,21 +190,51 @@ check_npm() {
   success "npm v$npm_version"
 }
 
+# ── 配置 npm 用户目录 ────────────────────────────────────
+setup_npm_prefix() {
+  local npm_prefix
+  npm_prefix=$(npm config get prefix 2>/dev/null)
+
+  # 如果 npm prefix 是系统目录，配置为用户目录
+  if [[ "$npm_prefix" == "/usr"* ]] || [[ "$npm_prefix" == "/usr/local"* ]]; then
+    local user_npm="$HOME/.npm-global"
+    mkdir -p "$user_npm"
+    npm config set prefix "$user_npm" 2>/dev/null
+
+    # 添加到 PATH
+    if [[ ":$PATH:" != *":$user_npm/bin:"* ]]; then
+      export PATH="$user_npm/bin:$PATH"
+
+      # 写入 shell 配置
+      local shell_rc=""
+      case "$SHELL" in
+        */zsh)  shell_rc="$HOME/.zshrc" ;;
+        */bash) shell_rc="$HOME/.bashrc" ;;
+        *)      shell_rc="$HOME/.profile" ;;
+      esac
+
+      if [ -f "$shell_rc" ] && ! grep -qF '.npm-global/bin' "$shell_rc"; then
+        echo "" >> "$shell_rc"
+        echo "# npm 全局包用户目录" >> "$shell_rc"
+        echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> "$shell_rc"
+      fi
+    fi
+
+    info "已配置 npm 使用用户目录: $user_npm"
+  fi
+}
+
 # ── 安装 CLI ─────────────────────────────────────────────
 install_cli() {
   echo ""
   info "安装 yuncode-cli..."
 
-  # 方式1: 尝试 npm 全局安装
+  # 配置 npm 用户目录（避免需要 sudo）
+  setup_npm_prefix
+
+  # 方式1: npm 全局安装
   if npm install -g "$NPM_PACKAGE" 2>/dev/null; then
     success "通过 npm 全局安装完成"
-    return 0
-  fi
-
-  # 权限不足时用 sudo 重试
-  warn "全局安装需要权限提升"
-  if sudo npm install -g "$NPM_PACKAGE" 2>/dev/null; then
-    success "通过 npm 全局安装完成（sudo）"
     return 0
   fi
 
