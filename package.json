@@ -1,0 +1,39 @@
+{
+  "name": "@eera/yuncode-cli",
+  "version": "1.0.0",
+  "description": "E时代云剪切板命令行工具 — 在终端中快速存取云剪切板内容",
+  "author": "E时代 <dev@emoera.cn>",
+  "homepage": "https://code.emoera.cn",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dijkstra402/emoera-code-cli"
+  },
+  "bin": {
+    "yuncode": "./bin/yuncode.js"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "LICENSE",
+    "README.md"
+  ],
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "inquirer": "^9.3.0",
+    "ora": "^8.0.1"
+  },
+  "keywords": [
+    "clipboard",
+    "cli",
+    "yuncode",
+    "cloud-clipboard",
+    "e-era",
+    "emoera"
+  ],
+  "license": "MIT"
+}
