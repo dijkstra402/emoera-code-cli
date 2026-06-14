@@ -14,6 +14,18 @@
 </p>
 
 <p align="center">
+  <a href="https://www.npmjs.com/package/emoera-code-cli">
+    <img src="https://img.shields.io/npm/v/emoera-code-cli?color=6366f1" alt="npm version">
+  </a>
+  <a href="https://www.npmjs.com/package/emoera-code-cli">
+    <img src="https://img.shields.io/npm/dt/emoera-code-cli?color=8b5cf6" alt="npm downloads">
+  </a>
+  <a href="https://github.com/dijkstra402/emoera-code-cli/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-a78bfa" alt="license">
+  </a>
+</p>
+
+<p align="center">
   <a href="https://code.emoera.cn">官网</a> ·
   <a href="https://github.com/dijkstra402/emoera-code-cli">GitHub</a> ·
   <a href="#安装">安装</a> ·
@@ -73,7 +85,7 @@ curl -fsSL https://code.emoera.cn/install.sh | bash -s -- --uninstall
 irm https://code.emoera.cn/install.ps1 | iex -- --uninstall
 
 # 或通过 npm
-npm uninstall -g @eera/yuncode-cli
+npm uninstall -g emoera-code-cli
 ```
 
 ## 使用
@@ -234,30 +246,112 @@ yuncode pull abc123 -o - | grep "ERROR"
 
 ```bash
 # 克隆仓库
-git clone https://github.com/emoera/yuncode-cli.git
-cd yuncode-cli
+git clone https://github.com/dijkstra402/emoera-code-cli.git
+cd emoera-code-cli
 
 # 安装依赖
 npm install
 
-# 本地链接
+# 本地链接（开发时使用）
 npm link
 
 # 运行
 yuncode --help
+
+# 测试功能
+yuncode push "测试内容"
+yuncode list
+```
+
+### 项目结构
+
+```
+emoera-code-cli/
+├── bin/
+│   └── yuncode.js          # CLI 入口
+├── src/
+│   ├── api.js              # API 请求封装
+│   ├── config.js           # 配置管理
+│   ├── ui.js               # 品牌样式和工具函数
+│   └── commands/           # 命令实现
+│       ├── login.js
+│       ├── push.js
+│       ├── pull.js
+│       ├── list.js
+│       └── config.js
+├── install.sh              # macOS/Linux 安装脚本
+├── install.ps1             # Windows 安装脚本
+├── package.json
+└── README.md
 ```
 
 ## 许可证
 
 [MIT](LICENSE)
 
+## 常见问题
+
+### 如何更新到最新版本？
+
+```bash
+npm update -g emoera-code-cli
+```
+
+### Token 保存在哪里？
+
+配置文件位于 `~/.yuncode/config.json`，包含 API 地址和 Token。
+
+### 支持哪些文件类型？
+
+支持所有文本文件和二进制文件，单个文件最大 50MB。
+
+### 如何设置自定义 API 服务器？
+
+```bash
+yuncode config set api_url https://your-api-server.com/api
+```
+
+### 出现网络错误怎么办？
+
+检查：
+1. 网络连接是否正常
+2. API 服务器地址是否正确：`yuncode config get api_url`
+3. Token 是否有效：重新运行 `yuncode login`
+
+## 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+1. Fork 本仓库
+2. 创建特性分支：`git checkout -b feature/amazing-feature`
+3. 提交更改：`git commit -m 'Add amazing feature'`
+4. 推送分支：`git push origin feature/amazing-feature`
+5. 提交 Pull Request
+
+## 更新日志
+
+### v1.0.0 (2026-06-14)
+
+- 🎉 首次发布
+- ✨ 支持文本/代码/文件上传
+- 🔐 基于 PAT 的安全认证
+- 🎨 E时代品牌设计
+- 📦 多平台一键安装脚本
+- 🔗 完整的管道支持
+
 ## 相关项目
 
-- [E时代云剪切板](https://code.emoera.cn) — Web 应用
-- [Chrome 扩展](https://github.com/dijkstra402/emoera-code-cli/tree/main/chrome-extension) — 浏览器扩展
+- [E时代云剪切板 Web 应用](https://code.emoera.cn) — 在线剪切板服务
+- Chrome 扩展 — 浏览器右键保存（开发中）
+
+## 许可与致谢
+
+本项目基于 [MIT 许可证](LICENSE) 开源。
+
+感谢所有贡献者和使用者的支持！
 
 ---
 
 <p align="center">
-  <sub>Made with 💜 by E时代</sub>
+  <sub>Made with 💜 by <a href="https://emoera.cn">E时代</a></sub>
 </p>
